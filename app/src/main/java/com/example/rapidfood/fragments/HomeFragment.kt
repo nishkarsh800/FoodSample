@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
+import com.bumptech.glide.Glide
+import com.example.rapidfood.databinding.FragmentHomeBinding
 import com.example.rapidfood.dataclasses.Meal
 import com.example.rapidfood.dataclasses.MealList
 import com.example.rapidfood.retrofit.RetrofitInstance
@@ -14,7 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFragment : Fragment() {
-
+   private lateinit var binding: FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -23,15 +26,19 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = binding.root
 
         // Move Retrofit API call here
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                 if (response.body() != null) {
                     val randomMeal: Meal = response.body()!!.meals[0]
-                    Log.d("test", "meal id ${randomMeal.idMeal} name ${randomMeal.strMeal}")
+                    Glide.with(this@HomeFragment)
+                        .load(randomMeal.strMealThumb)
+                        .into(binding.imgRandomMeal)
                 } else {
                     Log.d("test", "Response body is null")
                 }
