@@ -55,8 +55,8 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
     // Navigation Components
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.2")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.2")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.3")
 
     // Room Database
     implementation ("androidx.room:room-runtime:2.5.2")
