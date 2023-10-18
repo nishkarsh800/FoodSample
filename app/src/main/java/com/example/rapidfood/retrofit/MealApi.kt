@@ -1,7 +1,7 @@
 package com.example.rapidfood.retrofit
 
-import com.example.rapidfood.dataclasses.CategoryList
-import com.example.rapidfood.dataclasses.MealList
+import com.example.rapidfood.model.CategoryList
+import com.example.rapidfood.model.MealList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

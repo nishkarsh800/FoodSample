@@ -3,10 +3,9 @@ package com.example.rapidfood.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.rapidfood.databinding.PopularItemsBinding
-import com.example.rapidfood.dataclasses.CategoryMeals
+import com.example.rapidfood.model.CategoryMeals
 
 class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
     lateinit var onItemClick:((CategoryMeals) -> Unit)

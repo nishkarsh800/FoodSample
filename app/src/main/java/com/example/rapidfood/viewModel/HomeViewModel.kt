@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rapidfood.dataclasses.CategoryList
-import com.example.rapidfood.dataclasses.CategoryMeals
-import com.example.rapidfood.dataclasses.Meal
-import com.example.rapidfood.dataclasses.MealList
+import com.example.rapidfood.model.CategoryList
+import com.example.rapidfood.model.CategoryMeals
+import com.example.rapidfood.model.Meal
+import com.example.rapidfood.model.MealList
 import com.example.rapidfood.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback

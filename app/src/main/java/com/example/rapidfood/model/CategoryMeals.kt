@@ -1,4 +1,4 @@
-package com.example.rapidfood.dataclasses
+package com.example.rapidfood.model
 
 data class CategoryMeals(
     val idMeal: String,

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.rapidfood.databinding.ActivityMealBinding
 import com.example.rapidfood.HomeFragment
 import com.example.rapidfood.R
-import com.example.rapidfood.dataclasses.Meal
+import com.example.rapidfood.model.Meal
 import com.example.rapidfood.viewModel.MealViewModel
 
 class MealActivity : AppCompatActivity() {
@@ -27,14 +27,14 @@ class MealActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mealMvvm = ViewModelProviders.of(this)[MealViewModel::class.java]
-        getMealInformtionFromIntent()
+        getMealInformationFromIntent()
 
         setInformationInViews()
 
         loadingCase()
 
         mealMvvm.getMealDetail(mealId)
-        observeMealDeatilsLiveData()
+        observeMealDetailsLiveData()
 
         onYoutubeImageClick()
     }
@@ -46,20 +46,18 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeMealDeatilsLiveData() {
-        mealMvvm.observeMealDetailsLiveData().observe(this, object : Observer<Meal> {
-            override fun onChanged(value: Meal) {
-                onResponseCase()
-                val meal = value
+    private fun observeMealDetailsLiveData() {
+        mealMvvm.observeMealDetailsLiveData().observe(this
+        ) { value ->
+            onResponseCase()
+            val meal = value
 
-                binding.tvCategories.text = "Category:${meal!!.strCategory}"
-                binding.tvArea.text = "Area:${meal.strArea}"
-                binding.tvInstructionsSteps.text = meal.strInstructions
+            binding.tvCategories.text = "Category:${meal!!.strCategory}"
+            binding.tvArea.text = "Area:${meal.strArea}"
+            binding.tvInstructionsSteps.text = meal.strInstructions
 
-                youtubeLink = meal.strYoutube
-            }
-
-        })
+            youtubeLink = meal.strYoutube
+        }
     }
 
 
@@ -73,7 +71,7 @@ class MealActivity : AppCompatActivity() {
         binding.collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.white))
     }
 
-    private fun getMealInformtionFromIntent() {
+    private fun getMealInformationFromIntent() {
         val intent = intent
         mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
         mealName = intent.getStringExtra(HomeFragment.MEAL_NAME)!!

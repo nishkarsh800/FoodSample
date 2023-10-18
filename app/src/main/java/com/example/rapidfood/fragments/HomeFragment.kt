@@ -6,15 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.rapidfood.activities.MealActivity
 import com.example.rapidfood.adapter.MostPopularAdapter
 import com.example.rapidfood.databinding.FragmentHomeBinding
-import com.example.rapidfood.dataclasses.CategoryMeals
-import com.example.rapidfood.dataclasses.Meal
+import com.example.rapidfood.model.CategoryMeals
+import com.example.rapidfood.model.Meal
 import com.example.rapidfood.viewModel.HomeViewModel
 
 class HomeFragment : Fragment() {
