@@ -7,18 +7,24 @@ import com.bumptech.glide.Glide
 import com.example.rapidfood.databinding.PopularItemsBinding
 import com.example.rapidfood.model.MealsByCategory
 
-class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
-    lateinit var onItemClick:((MealsByCategory) -> Unit)
+class MostPopularAdapter() : RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
+    lateinit var onItemClick: ((MealsByCategory) -> Unit)
     private var mealList = ArrayList<MealsByCategory>()
 
-    fun setMeals(mealsList:ArrayList<MealsByCategory>){
+    fun setMeals(mealsList: ArrayList<MealsByCategory>) {
         this.mealList = mealsList
         notifyDataSetChanged()
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMealViewHolder {
-        return PopularMealViewHolder(PopularItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PopularMealViewHolder(
+            PopularItemsBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -30,11 +36,12 @@ class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularMealVi
             .load(mealList[position].strMealThumb)
             .into(holder.binding.imgPopularMealItem)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onItemClick.invoke(mealList[position])
         }
     }
 
-    class PopularMealViewHolder(val binding:PopularItemsBinding):RecyclerView.ViewHolder(binding.root)
+    class PopularMealViewHolder(val binding: PopularItemsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
 }
