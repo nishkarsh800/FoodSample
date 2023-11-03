@@ -12,26 +12,27 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CategoryMealsViewModel : ViewModel() {
-   val mealsLiveData = MutableLiveData<List<MealsByCategory>>()
-    fun getMealsByCategory(categoryName:String){
-        RetrofitInstance.api.getMealsByCategory(categoryName).enqueue(object:Callback<MealsByCategoryList>{
-            override fun onResponse(
-                call: Call<MealsByCategoryList>,
-                response: Response<MealsByCategoryList>
-            ) {
-                response.body()?.let { mealsList->
-                    mealsLiveData.postValue(mealsList.meals)
+    val mealsLiveData = MutableLiveData<List<MealsByCategory>>()
+    fun getMealsByCategory(categoryName: String) {
+        RetrofitInstance.api.getMealsByCategory(categoryName)
+            .enqueue(object : Callback<MealsByCategoryList> {
+                override fun onResponse(
+                    call: Call<MealsByCategoryList>,
+                    response: Response<MealsByCategoryList>
+                ) {
+                    response.body()?.let { mealsList ->
+                        mealsLiveData.postValue(mealsList.meals)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
-                Log.e("CategoryMealsViewModel",t.message.toString())
-            }
+                override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
+                    Log.e("CategoryMealsViewModel", t.message.toString())
+                }
 
-        })
+            })
     }
 
-    fun observeMealsLiveData() : LiveData<List<MealsByCategory>>{
+    fun observeMealsLiveData(): LiveData<List<MealsByCategory>> {
         return mealsLiveData
     }
 }

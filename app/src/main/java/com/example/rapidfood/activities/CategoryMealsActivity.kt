@@ -1,9 +1,7 @@
 package com.example.rapidfood.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rapidfood.HomeFragment
@@ -12,9 +10,9 @@ import com.example.rapidfood.databinding.ActivityCategoryMealsBinding
 import com.example.rapidfood.viewModel.CategoryMealsViewModel
 
 class CategoryMealsActivity : AppCompatActivity() {
-    lateinit var binding : ActivityCategoryMealsBinding
-    lateinit var categoryMealsViewModel: CategoryMealsViewModel
-    lateinit var categoryMealsAdapter: CategoryMealsAdapter
+    private lateinit var binding: ActivityCategoryMealsBinding
+    private lateinit var categoryMealsViewModel: CategoryMealsViewModel
+    private lateinit var categoryMealsAdapter: CategoryMealsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealsBinding.inflate(layoutInflater)
@@ -26,17 +24,16 @@ class CategoryMealsActivity : AppCompatActivity() {
 
         categoryMealsViewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
 
-        categoryMealsViewModel.observeMealsLiveData().observe(this,Observer{ mealsList->
-
-             binding.tvCategoryCount.text = mealsList.size.toString()
+        categoryMealsViewModel.observeMealsLiveData().observe(this) { mealsList ->
+            binding.tvCategoryCount.text = mealsList.size.toString()
             categoryMealsAdapter.setMealsList(mealsList)
-        })
+        }
     }
 
-    private fun prepareRecyclerView(){
+    private fun prepareRecyclerView() {
         categoryMealsAdapter = CategoryMealsAdapter()
         binding.rvMeals.apply {
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = categoryMealsAdapter
         }
     }
