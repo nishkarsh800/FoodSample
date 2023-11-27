@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.rapidfood.database.MealDatabase
 import com.example.rapidfood.model.Category
 import com.example.rapidfood.model.CategoryList
@@ -12,6 +13,7 @@ import com.example.rapidfood.model.MealsByCategory
 import com.example.rapidfood.model.Meal
 import com.example.rapidfood.model.MealList
 import com.example.rapidfood.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,6 +75,19 @@ class HomeViewModel(
             }
 
         })
+    }
+
+
+    fun deleteMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+
+    fun insertMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().upsert(meal)
+        }
     }
 
     fun observeRandomMealLivedata(): LiveData<Meal> {
