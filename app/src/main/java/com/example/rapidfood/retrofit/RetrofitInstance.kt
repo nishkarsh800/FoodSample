@@ -3,6 +3,7 @@ package com.example.rapidfood.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 object RetrofitInstance {
     val api: MealApi by lazy {
         Retrofit.Builder()
