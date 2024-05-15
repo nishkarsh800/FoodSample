@@ -1,4 +1,4 @@
-# FoodSample 😋(IN PROGRESS)
+# FoodSample 😋
 
 <div align="center">
 <img width="400" src="https://github.com/nishkarsh800/FoodSample/assets/94742536/717aec4b-ea67-41ed-b833-82fdf1d90c94" /></div>
